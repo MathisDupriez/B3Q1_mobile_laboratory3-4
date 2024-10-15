@@ -12,19 +12,25 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+
+import java.util.UUID;
+
 import be.com.learn.adminsys.laboratoire3et4.R;
 import be.com.learn.adminsys.laboratoire3et4.models.Crime;
+import be.com.learn.adminsys.laboratoire3et4.models.CrimeLab;
 
 public class CrimerFragment extends Fragment {
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDatebutton;
     private CheckBox mSolvedCheckBox;
+    public static final String CRIME_ID = "crime_id";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
+        UUID crime_id = (UUID) getActivity().getIntent().getSerializableExtra(CRIME_ID);
+        mCrime = CrimeLab.get().getCrime(crime_id);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,17 +71,14 @@ public class CrimerFragment extends Fragment {
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         //set the methode when something is done with the checkbox
         mSolvedCheckBox.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean
-                            isChecked) {
-                        mCrime.setSolved(isChecked);
-                    }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean
+                        isChecked) {
+                    mCrime.setSolved(isChecked);
                 }
+            }
         );
-
-
-
         return v;
     }
 }

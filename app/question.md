@@ -67,3 +67,24 @@ checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 
 In this example, the `OnCheckedChangeListener` is added to a `CheckBox` to listen for changes in its checked state and execute code accordingly.
 
+# Question 3
+- a. singelton design pattern implementation
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {
+        // Private constructor to prevent instantiation
+    }
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+
+- b. unmodfiyableList becaus it is a list that does not allow modification of its elements or size after it has been created. 
+This can be useful when you want to ensure that a list remains constant and cannot be accidentally modified by other parts of the code.
